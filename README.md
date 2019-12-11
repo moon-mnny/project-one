@@ -3,7 +3,9 @@
 
 Project One
 
-## Collaborators
+##Collaborators
+
+Ricardo Rojas [@fumacarne](https://github.com/fumacarne)
 
 Edward Harley [@eharley19](https://github.com/eharley19)
 
