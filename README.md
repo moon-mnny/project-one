@@ -1,6 +1,6 @@
 ## Description
 
-Project One
+Project One for Columbia Full-Stack Flex Program
 
 ## Collaborators
 
