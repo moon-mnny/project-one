@@ -16,17 +16,10 @@ recipeSearchBtn.addEventListener("click", function(event) {
   $.ajax({
     type: "GET",
     url: queryURL
-    // response headers: {
-    //   "Content-Type": "application/json"
-    // }???
   }).then(function(response) {
     console.log(response);
     recipeId = response.results[0].id;
     console.log(recipeId);
-    var baseURL = "https://spoonacular.com/recipeImages/";
-    var imgURL = baseURL + response.results[0].image;
-    // var dishImg = $("<img>").attr("src", imgURL);
-    // $(".images").append(dishImg);
     var dishTitle = $("<td>").text(response.results[0].title);
     $("<tr>").append(dishTitle);
     var prepareMinutes = $("<h3>").text(
@@ -37,5 +30,21 @@ recipeSearchBtn.addEventListener("click", function(event) {
       `Servings: ${response.results[0].servings}`
     );
     $(".info").append(totalServings);
+    // get ingredients
+    var recipeURL =
+      `https://api.spoonacular.com/recipes/${recipeId}/information?includeNutrition=false&apiKey=` +
+      spoonacularKey;
+    $.ajax({
+      type: "GET",
+      url: recipeURL
+    }).then(function(response) {
+      console.log(response);
+      var allIngrdts = response.extendedIngredients;
+      console.log(allIngrdts);
+      for (var i = 0; i < allIngrdts.length; i++) {
+        var ingredient = $("<h3>").text(allIngrdts[i].originalString);
+        $(".ingredients").append(ingredient);
+      }
+    });
   });
 });
