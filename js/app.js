@@ -28,9 +28,10 @@ recipeSearchBtn.addEventListener("click", function(event) {
       //   var recipeImg = $("<img>");
       //   recipeImg.attr("src", recipeImgURL);
       //   recipeImg.attr("class", "resultImg");
+      var likeButton = `<button id = ${recipeId} type="button" class = "like" state = "like">LIKE</button>`;
       var recipeServing = results[i].servings;
       var recipeTime = results[i].readyInMinutes;
-      var recipeArr = [img, recipeTitle, recipeServing, recipeTime];
+      var recipeArr = [img, recipeTitle, recipeServing, recipeTime, likeButton];
       var newRow = $("<tr>");
       recipeArr.forEach(function(detail) {
         var column = document.createElement("td");
@@ -38,6 +39,7 @@ recipeSearchBtn.addEventListener("click", function(event) {
         newRow.append(column);
       });
       $("tbody").append(newRow);
+
       console.log("Recipe ID is" + recipeId);
       //   var recipeURL =
       //     `https://api.spoonacular.com/recipes/${recipeId}/information?includeNutrition=false&apiKey=` +
@@ -57,5 +59,16 @@ recipeSearchBtn.addEventListener("click", function(event) {
       console.log(recipeArr);
       // get ingredients
     }
+    $(".like").on("click", function() {
+      var buttonId = $(this).attr("id");
+      console.log(`Button clicked is ${buttonId}`);
+      if ($(this).attr("state") === "like") {
+        $(this).text("UNLIKE");
+        $(this).attr("state", "unlike");
+      } else if ($(this).attr("state") === "unlike") {
+        $(this).text("LIKE");
+        $(this).attr("state", "like");
+      }
+    });
   });
 });
