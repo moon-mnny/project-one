@@ -44,6 +44,14 @@ recipeSearchBtn.addEventListener("click", function(event) {
       for (var i = 0; i < allIngrdts.length; i++) {
         var ingredient = $("<h3>").text(allIngrdts[i].originalString);
         $(".ingredients").append(ingredient);
+
+        if (response.results=true){
+          console.log('DEBUG')
+          var buttom = document.createElement('div')
+          buttom.innerHTML='<buttom>Save</buttom>';
+          document.body.appendChild(buttom);
+          
+        }
       }
     });
   });
