@@ -26,5 +26,3 @@ userRef.onSnapshot(doc => {
     console.warn("[WARNING] user LCaIJje6quQOd5NOc9Cw does not exist");
   }
 });
-
-
