@@ -1,4 +1,4 @@
-console.log("hello");
+// console.log("hello");
 const currentUser = {};
 const recipeSearchBtn = document.querySelector("#recipe-search-btn");
 const spoonacularKey = "0d9362f34041402b8ec15c03ed3dead9";
@@ -87,15 +87,22 @@ recipeSearchBtn.addEventListener("click", function(event) {
         "mdl-button mdl-js-button mdl-js-ripple-effect"
       );
       newRecipeLink.html("Let's Make!!");
+      var likeButtonDiv = $("<button>").text("LIKE BUTTON");
       newRecipeLinkDiv.append(newRecipeLink);
+      newRecipeLinkDiv.append(likeButtonDiv);
       //Like Button
-      var likeUnlike =
-        currentUser.recipes.indexOf(recipeId) === -1 ? "like" : "unlike";
-      var likeButton = $("<button>").attr("id", `${recipeId}`);
-      likeButton.attr("type", "check");
-      likeButton.attr("state", `${likeUnlike}`);
-      likeButton.html(`${likeUnlike.toUpperCase()}`);
-      newRecipeLinkDiv.append(likeButton);
+
+      //   var likeUnlike =
+      //     currentUser.recipes.indexOf(recipeId) === -1 ? "like" : "unlike";
+      //   var likeButton = `<button id=${recipeId} type="button" class="like-button" state="${likeUnlike}">${likeUnlike.toUpperCase()}</button>`;
+      //   likeButtonDiv.html(likeButton);
+      //   var likeUnlike =
+      //     currentUser.recipes.indexOf(recipeId) === -1 ? "like" : "unlike";
+      //   var likeButton = $("<button>").attr("id", `${recipeId}`);
+      //   likeButton.attr("type", "check");
+      //   likeButton.attr("state", `${likeUnlike}`);
+      //   likeButton.html(`${likeUnlike.toUpperCase()}`);
+      //   newRecipeLinkDiv.append(likeButton);
       //////Toggle not working ----- Still working/////////
       //   var likeBtnLabel = $("<label>").attr(
       //     "class",
@@ -289,3 +296,26 @@ recipeSearchBtn.addEventListener("click", function(event) {
 //     console.warn("[WARNING] user LCaIJje6quQOd5NOc9Cw does not exist");
 //   }
 // });
+var firebaseConfig = {
+  apiKey: "AIzaSyBf1Ulnb618Uos69ZB7Ti0mZ6tUev842xk",
+  authDomain: "project-one-b8f55.firebaseapp.com",
+  databaseURL: "https://project-one-b8f55.firebaseio.com",
+  projectId: "project-one-b8f55",
+  storageBucket: "project-one-b8f55.appspot.com",
+  messagingSenderId: "558983366534",
+  appId: "1:558983366534:web:a71ad15fe65c9ac9964e07"
+};
+
+firebase.initializeApp(firebaseConfig);
+var db = firebase.firestore();
+const countRef = db.collection("users").doc("6AqEslwCOj4wCVoNv1tM");
+countRef.onSnapshot(doc => {
+  if (doc.exists) {
+    console.log("Document data:", doc.data());
+    count = doc.data().text;
+    text.textContent = count;
+  } else {
+    // doc.data() will be undefined in this case
+    console.warn("No such document!");
+  }
+});
