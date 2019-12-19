@@ -1,3 +1,4 @@
+
 const qs = selector => document.querySelector(selector);
 const spoonacularKey = "0d9362f34041402b8ec15c03ed3dead9";
 // references to our count elements
@@ -34,6 +35,7 @@ $.ajax({
     `Cuisine: ${randomCuisineType}<br> Serving: ${randomServing}<br> Time to prepare: ${randomTime}`
   );
 });
+
 var firebaseConfig = {
   apiKey: "AIzaSyBf1Ulnb618Uos69ZB7Ti0mZ6tUev842xk",
   authDomain: "project-one-b8f55.firebaseapp.com",
@@ -46,6 +48,24 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
+
+
+var currentUser = {};
+
+const userRef = db.collection("users").doc("LCaIJje6quQOd5NOc9Cw")
+userRef.onSnapshot(doc => {
+  if (doc.exists) {
+    var userData = doc.data();
+    console.log("[DEBUG] user LCaIJje6quQOd5NOc9Cw updated ::", userData);
+    currentUser = {
+      id: "LCaIJje6quQOd5NOc9Cw",
+      ...userData
+    }
+  } else {
+    console.warn("[WARNING] user LCaIJje6quQOd5NOc9Cw does not exist");
+  }
+});
+=======
 const countRef = db.collection("users").doc("6AqEslwCOj4wCVoNv1tM");
 countRef.onSnapshot(doc => {
   if (doc.exists) {
@@ -126,3 +146,4 @@ for (var i = 0; i < recipe.length; i++) {
     $("#recipes-body").append(newRecipeDiv);
   });
 }
+
