@@ -16,7 +16,24 @@ saved.addEventListener("click", () => {
     })
     .then(() => console.log("updated the count successfully!"));
 });
-
+const recipeSearchBtn = document.querySelector("#recipe-search-btn");
+var randomQueryURL = `https://api.spoonacular.com/recipes/random?number=1&apiKey=${spoonacularKey}`;
+$.ajax({
+  type: "GET",
+  url: randomQueryURL
+}).then(function(response) {
+  console.log(response.recipes);
+  var randomTitle = response.recipes[0].creditsText;
+  var randomCuisineType = response.recipes[0].cuisines.join(", ");
+  var randomServing = response.recipes[0].servings;
+  var randomTime = response.recipes[0].readyInMinutes;
+  var randomImg = `url(${response.recipes[0].image})`;
+  $("#recommendation-img").css("background-image", randomImg);
+  $("#recommendation-title").html(randomTitle);
+  $("#recommendation-summary").html(
+    `Cuisine: ${randomCuisineType}<br> Serving: ${randomServing}<br> Time to prepare: ${randomTime}`
+  );
+});
 var firebaseConfig = {
   apiKey: "AIzaSyBf1Ulnb618Uos69ZB7Ti0mZ6tUev842xk",
   authDomain: "project-one-b8f55.firebaseapp.com",
