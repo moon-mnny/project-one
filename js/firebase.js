@@ -132,7 +132,7 @@ for (var i = 0; i < recipe.length; i++) {
     newRecipeLink.html("Let's Make!!");
     newRecipeLinkDiv.append(newRecipeLink);
     //Like Button
-    var likeButton = $("<button>").attr("id", `${recipe}`);
+    var likeButton = $("<button>").attr("id", `${recipe[i]}`);
     newRecipeLinkDiv.append(likeButton);
 
     likeButton.attr("type", "button");
